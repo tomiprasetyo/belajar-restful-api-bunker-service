@@ -1,0 +1,330 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Bunker Service RESTful API",
+    "description": "API Specification for Bunker Service RESTful API",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8095/api"
+    }
+  ],
+  "paths": {
+    "/bunker-services": {
+        "get": {
+            "security": [
+                {
+                    "BunkerServiceAuth": []
+                }
+            ],
+            "tags": ["Bunker Service API"],
+            "description": "List of All Bunker Services",
+            "summary": "List of All Bunker Services",
+            "responses": {
+                "200": {
+                    "description": "Success get all bunker services",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "code": {
+                                        "type": "number"
+                                    },
+                                    "status": {
+                                        "type": "string"
+                                    },
+                                    "data": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/BunkerService"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "post": {
+            "security": [
+                {
+                    "BunkerServiceAuth": []
+                }
+            ],
+            "tags": ["Bunker Service API"],
+            "description": "Create New Bunker Service",
+            "summary": "Create New Bunker Service",
+            "requestBody": {
+              "content": {
+                "application/json": {
+                    "schema": {
+                        "$ref": "#/components/schemas/CreateOrUpdateBunkerService"
+                    }
+                }
+              }  
+            },
+            "responses": {
+                "200": {
+                    "description": "Success Create Bunker Service",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "code": {
+                                        "type": "number"
+                                    },
+                                    "status": {
+                                        "type": "string"
+                                    },
+                                    "data": {
+                                        "$ref": "#/components/schemas/BunkerService"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "/bunker-services/{buker-serviceId}": {
+        "get": {
+            "security": [
+                {
+                    "BunkerServiceAuth": []
+                }
+            ],
+            "tags": ["Bunker Service API"],
+            "summary": "Get Bunker Service By Id",
+            "description": "Get Bunker Service By Id",
+            "parameters": [
+                {
+                    "name": "bunker-serviceId",
+                    "in": "path",
+                    "description": "Bunker Service Id",
+                    "required": true,
+                    "schema": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "Success Get Bunker Service",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "code": {
+                                        "type": "number"
+                                    },
+                                    "status": {
+                                        "type": "string"
+                                    },
+                                    "data": {
+                                        "$ref": "#/components/schemas/BunkerService"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "put": {
+            "security": [
+                {
+                    "BunkerServiceAuth": []
+                }
+            ],
+            "tags": ["Bunker Service API"],
+            "summary": "Update Bunker Service By Id",
+            "description": "Update Bunker Service By Id",
+            "parameters": [
+                {
+                    "name": "bunker-serviceId",
+                    "in": "path",
+                    "description": "Bunker Service Id",
+                    "required": true,
+                    "schema": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                }
+            ],
+            "requestBody": {
+                "content": {
+                  "application/json": {
+                      "schema": {
+                          "$ref": "#/components/schemas/CreateOrUpdateBunkerService"
+                      }
+                  }
+                }  
+              },
+            "responses": {
+                "200": {
+                    "description": "Success Update Bunker Service",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "code": {
+                                        "type": "number"
+                                    },
+                                    "status": {
+                                        "type": "string"
+                                    },
+                                    "data": {
+                                        "$ref": "#/components/schemas/BunkerService"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "delete": {
+            "security": [
+                {
+                    "BunkerServiceAuth": []
+                }
+            ],
+            "tags": ["Bunker Service API"],
+            "summary": "Delete Bunker Service By Id",
+            "description": "Delete Bunker Service By Id",
+            "parameters": [
+                {
+                    "name": "bunker-serviceId",
+                    "in": "path",
+                    "description": "Bunker Service Id",
+                    "required": true,
+                    "schema": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "Success Delete Bunker Service",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "code": {
+                                        "type": "number"
+                                    },
+                                    "status": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+        "BunkerServiceAuth": {
+            "type": "apiKey",
+            "in": "header",
+            "name": "X-API-Key",
+            "description": "Authentication for Bunker Service API"
+        }
+    },
+    "schemas": {
+        "CreateOrUpdateBunkerService": {
+            "type": "object",
+            "properties": {
+                "noSO": {
+                    "type": "string"
+                },
+                "namaPerusahaan": {
+                    "type": "string"
+                },
+                "namaKapal": {
+                    "type": "string"
+                },
+                "namaProduk": {
+                    "type": "string"
+                },
+                "jumlahPengisian": {
+                    "type": "number"
+                },
+                "pelabuhan": {
+                    "type": "string"
+                },
+                "nopolTruk": {
+                    "type": "string"
+                },
+                "namaOperator": {
+                    "type": "string"
+                },
+                "isFinished": {
+                    "type": "boolean",
+                    "default": "false"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "type": "string"
+                }
+            }
+        },
+        "BunkerService": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number"
+                },
+                "uuid": {
+                    "type": "number"
+                },
+                "noSO": {
+                    "type": "string"
+                },
+                "namaPerusahaan": {
+                    "type": "string"
+                },
+                "namaKapal": {
+                    "type": "string"
+                },
+                "namaProduk": {
+                    "type": "string"
+                },
+                "jumlahPengisian": {
+                    "type": "number"
+                },
+                "pelabuhan": {
+                    "type": "string"
+                },
+                "nopolTruk": {
+                    "type": "string"
+                },
+                "namaOperator": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+  }
+}
