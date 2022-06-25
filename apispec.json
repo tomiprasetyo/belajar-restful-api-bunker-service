@@ -248,6 +248,9 @@
         "CreateOrUpdateBunkerService": {
             "type": "object",
             "properties": {
+                "guid": {
+                    "type": "string"
+                },
                 "noSO": {
                     "type": "string"
                 },
@@ -290,8 +293,8 @@
                 "id": {
                     "type": "number"
                 },
-                "uuid": {
-                    "type": "number"
+                "guid": {
+                    "type": "string"
                 },
                 "noSO": {
                     "type": "string"
