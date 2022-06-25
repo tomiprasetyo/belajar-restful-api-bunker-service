@@ -18,9 +18,9 @@ type BunkerServiceRepository interface {
 	// contoh di golang menggunakan sql.Tx
 	// parameter ketiga menggunakan data aslinya
 	// return data bunker service
-	Save(ctx *context.Context, tx sql.Tx, bunkerService domain.BunkerService) domain.BunkerService
-	Update(ctx *context.Context, tx sql.Tx, bunkerService domain.BunkerService) domain.BunkerService
-	Delete(ctx *context.Context, tx sql.Tx, bunkerService domain.BunkerService) // delete tidak perlu return data bunkerservice
-	FindById(ctx *context.Context, tx sql.Tx, bunkerServiceId int) domain.BunkerService
-	FindAll(ctx *context.Context, tx sql.Tx) []domain.BunkerService // return slice data bunkerservice
+	Save(ctx *context.Context, tx *sql.Tx, bunkerService domain.BunkerService) domain.BunkerService
+	Update(ctx *context.Context, tx *sql.Tx, bunkerService domain.BunkerService) domain.BunkerService
+	Delete(ctx *context.Context, tx *sql.Tx, bunkerService domain.BunkerService)                  // delete tidak perlu return data bunker service
+	FindById(ctx *context.Context, tx *sql.Tx, bunkerServiceId int) (domain.BunkerService, error) // return error jika data tidak ditemukan
+	FindAll(ctx *context.Context, tx *sql.Tx) []domain.BunkerService                              // return slice data bunker service
 }

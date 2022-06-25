@@ -1,7 +1,7 @@
 CREATE TABLE bunker_services (
     id INTEGER PRIMARY KEY AUTO_INCREMENT,
     guid VARCHAR(55) UNIQUE NOT NULL,
-    no_so VARCHAR(255) UNIQUE NOT NULL,
+    no_so VARCHAR(255) NOT NULL,
     nama_perusahaan VARCHAR(255) NOT NULL,
     nama_kapal VARCHAR(255) NOT NULL,
     nama_produk VARCHAR(255) NOT NULL,
