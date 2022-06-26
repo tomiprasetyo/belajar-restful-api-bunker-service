@@ -4,6 +4,7 @@ import (
 	"context"
 	"database/sql"
 
+	"github.com/go-playground/validator/v10"
 	"github.com/tomiprasetyo/belajar-restful-api-bunker-service/helper"
 	"github.com/tomiprasetyo/belajar-restful-api-bunker-service/model/domain"
 	"github.com/tomiprasetyo/belajar-restful-api-bunker-service/model/web"
@@ -18,10 +19,18 @@ type BunkerServiceServeImpl struct {
 
 	// koneksi ke database
 	DB *sql.DB
+
+	// attribut validate
+	Validate *validator.Validate
 }
 
 // implementasi kontrak
 func (service BunkerServiceServeImpl) Create(ctx context.Context, request web.BunkerServiceCreateRequest) web.BunkerServiceResponse {
+	// sebelum melakukan create data / transaksinya dimulai
+	// kita lakukan validasi terlebih dahulu
+	err := service.Validate.Struct(request)
+	helper.PanicIfError(err)
+
 	// karena kita menggunakan database transaksional menggunakan mysql
 	// berarti kita butuh requestnya dalam bentuk transaksional
 
@@ -54,6 +63,11 @@ func (service BunkerServiceServeImpl) Create(ctx context.Context, request web.Bu
 }
 
 func (service BunkerServiceServeImpl) Update(ctx context.Context, request web.BunkerServiceUpdateRequest) web.BunkerServiceResponse {
+	// sebelum melakukan update data / transaksinya dimulai
+	// kita lakukan validasi terlebih dahulu
+	err := service.Validate.Struct(request)
+	helper.PanicIfError(err)
+
 	tx, err := service.DB.Begin()
 	helper.PanicIfError(err)
 	defer helper.CommitOrRollback(tx)

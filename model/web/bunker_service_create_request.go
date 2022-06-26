@@ -2,17 +2,18 @@ package web
 
 import "time"
 
+// menambahkan validasi di create dan update
 // data model request
 type BunkerServiceCreateRequest struct {
-	NoSO            string    `json:"noSO"`
-	NamaPerusahaan  string    `json:"namaPerusahaan"`
-	NamaKapal       string    `json:"namaKapal"`
-	NamaProduk      string    `json:"namaProduk"`
-	JumlahPengisian int       `json:"jumlahPengisian"`
-	Pelabuhan       string    `json:"pelabuhan"`
-	NopolTruk       string    `json:"nopolTruk"`
-	NamaOperator    string    `json:"namaOperator"`
-	Description     string    `json:"description"`
-	CreatedAt       time.Time `json:"createdAt"`
-	UpdatedAt       time.Time `json:"updatedAt"`
+	NoSO            string `validate:"required,min=1,max=100" json:"noSO"`
+	NamaPerusahaan  string `validate:"required,min=1,max=100" json:"namaPerusahaan"`
+	NamaKapal       string `validate:"required,min=1,max=100" json:"namaKapal"`
+	NamaProduk      string `validate:"required,min=1,max=100" json:"namaProduk"`
+	JumlahPengisian int    `validate:"required,min=1,max=100" json:"jumlahPengisian"`
+	Pelabuhan       string `validate:"required,min=1,max=100" json:"pelabuhan"`
+	NopolTruk       string `validate:"required,min=1,max=100" json:"nopolTruk"`
+	NamaOperator    string `validate:"required,min=1,max=100" json:"namaOperator"`
+	Description     string `validate:"required,min=1,max=100" json:"description"`
+	CreatedAt       time.Time
+	UpdatedAt       time.Time
 }
