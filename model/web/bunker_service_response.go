@@ -5,7 +5,6 @@ import "time"
 // data model response
 type BunkerServiceResponse struct {
 	Id              int       `json:"id"`
-	GUID            string    `json:"guid"`
 	NoSO            string    `json:"noSO"`
 	NamaPerusahaan  string    `json:"namaPerusahaan"`
 	NamaKapal       string    `json:"namaKapal"`

@@ -6,10 +6,6 @@ import (
 	"github.com/tomiprasetyo/belajar-restful-api-bunker-service/model/web"
 )
 
-type GUID struct {
-	GUID string `uri:"guid" binding:"required,uuid4"`
-}
-
 // implementasi bunker service serve atau bisnis logic
 // buat kontrak service terlebih dahulu dalam bentuk interface
 // biasanya service function itu jumlahnya mengikuti APInya
@@ -27,7 +23,7 @@ type BunkerServiceServe interface {
 	// disarankan untuk buat data model request dan data model response-nya
 	Create(ctx context.Context, request web.BunkerServiceCreateRequest) web.BunkerServiceResponse
 	Update(ctx context.Context, request web.BunkerServiceUpdateRequest) web.BunkerServiceResponse
-	Delete(ctx context.Context, guid GUID)
-	FindById(ctx context.Context, guid GUID) web.BunkerServiceResponse
+	Delete(ctx context.Context, bunkerServiceId int)
+	FindById(ctx context.Context, bunkerServiceId int) web.BunkerServiceResponse
 	FindAll(ctx context.Context) []web.BunkerServiceResponse
 }
