@@ -22,7 +22,7 @@ func NewBunkerServiceRepository() BunkerServiceRepository {
 // method Save() digunakan untuk membuat data baru
 func (repository *BunkerServiceRepositoryImpl) Save(ctx context.Context, tx *sql.Tx, bunkerService domain.BunkerService) domain.BunkerService {
 	// buat query sql untuk membuat data yang baru
-	SQL := "INSERT INTO bunker_services(no_so, nama_perusahaan, nama_kapal, nama_produk, jumlah_pengisian, pelabuhan, nopol_truk, nama_operator, description, created_at) VALUES (?,?,?,?,?,?,?,?,?,?)"
+	SQL := "INSERT INTO bunker_services(no_so, nama_perusahaan, nama_kapal, nama_produk, jumlah_pengisian, pelabuhan, nopol_truk, nama_operator, description) VALUES (?,?,?,?,?,?,?,?,?)"
 
 	// eksekusi query sql
 	result, err := tx.ExecContext(ctx, SQL, bunkerService.NoSO, bunkerService.NamaPerusahaan, bunkerService.NamaKapal, bunkerService.NamaProduk, bunkerService.JumlahPengisian, bunkerService.Pelabuhan, bunkerService.NopolTruk, bunkerService.NamaOperator, bunkerService.Description)
@@ -62,7 +62,7 @@ func (repository *BunkerServiceRepositoryImpl) Delete(ctx context.Context, tx *s
 
 func (repository *BunkerServiceRepositoryImpl) FindById(ctx context.Context, tx *sql.Tx, bunkerServiceId int) (domain.BunkerService, error) {
 	// buat query sql untuk mencari data berdasarkan id
-	SQL := "SELECT no_so, nama_perusahaan, nama_kapal, nama_produk, jumlah_pengisian, pelabuhan, nopol_truk, nama_operator, description, created_at, updated_at FROM bunker_services WHERE id = ?"
+	SQL := "SELECT id, no_so, nama_perusahaan, nama_kapal, nama_produk, jumlah_pengisian, pelabuhan, nopol_truk, nama_operator, description FROM bunker_services WHERE id = ?"
 
 	// eksekusi query sql
 	rows, err := tx.QueryContext(ctx, SQL, bunkerServiceId)
@@ -75,7 +75,7 @@ func (repository *BunkerServiceRepositoryImpl) FindById(ctx context.Context, tx 
 	// lakukan pengechekan data jika ada dan data kosong
 	if rows.Next() {
 		// ambil data hasil query
-		err := rows.Scan(&bunkerService.Id, &bunkerService.NoSO, &bunkerService.NamaPerusahaan, &bunkerService.NamaKapal, &bunkerService.NamaProduk, &bunkerService.JumlahPengisian, &bunkerService.Pelabuhan, &bunkerService.NopolTruk, &bunkerService.NamaOperator, &bunkerService.Description, &bunkerService.CreatedAt, &bunkerService.UpdatedAt)
+		err := rows.Scan(&bunkerService.Id, &bunkerService.NoSO, &bunkerService.NamaPerusahaan, &bunkerService.NamaKapal, &bunkerService.NamaProduk, &bunkerService.JumlahPengisian, &bunkerService.Pelabuhan, &bunkerService.NopolTruk, &bunkerService.NamaOperator, &bunkerService.Description)
 		helper.PanicIfError(err)
 
 		return bunkerService, nil
@@ -88,7 +88,7 @@ func (repository *BunkerServiceRepositoryImpl) FindById(ctx context.Context, tx 
 
 func (repository *BunkerServiceRepositoryImpl) FindAll(ctx context.Context, tx *sql.Tx) []domain.BunkerService {
 	// buat query sql untuk mencari semua data
-	SQL := "SELECT id, no_so, nama_perusahaan, nama_kapal, nama_produk, jumlah_pengisian, pelabuhan, nopol_truk, nama_operator, description, created_at, updated_at FROM bunker_services"
+	SQL := "SELECT id, no_so, nama_perusahaan, nama_kapal, nama_produk, jumlah_pengisian, pelabuhan, nopol_truk, nama_operator, description FROM bunker_services"
 
 	// eksekusi query sql
 	rows, err := tx.QueryContext(ctx, SQL)
@@ -103,7 +103,7 @@ func (repository *BunkerServiceRepositoryImpl) FindAll(ctx context.Context, tx *
 		bunkerService := domain.BunkerService{}
 
 		// ambil data hasil query
-		err := rows.Scan(&bunkerService.Id, &bunkerService.NoSO, &bunkerService.NamaPerusahaan, &bunkerService.NamaKapal, &bunkerService.NamaProduk, &bunkerService.JumlahPengisian, &bunkerService.Pelabuhan, &bunkerService.NopolTruk, &bunkerService.NamaOperator, &bunkerService.Description, &bunkerService.CreatedAt, &bunkerService.UpdatedAt)
+		err := rows.Scan(&bunkerService.Id, &bunkerService.NoSO, &bunkerService.NamaPerusahaan, &bunkerService.NamaKapal, &bunkerService.NamaProduk, &bunkerService.JumlahPengisian, &bunkerService.Pelabuhan, &bunkerService.NopolTruk, &bunkerService.NamaOperator, &bunkerService.Description)
 		helper.PanicIfError(err)
 
 		// menambah data

@@ -40,7 +40,7 @@ func main() {
 	router.PUT("/api/bunker-services/:bunkerServiceId", bunkerServiceController.Update)
 
 	// API menghapus data
-	router.DELETE("/api/bunker-services/", bunkerServiceController.Delete)
+	router.DELETE("/api/bunker-services/:bunkerServiceId", bunkerServiceController.Delete)
 
 	// buat server
 	server := http.Server{

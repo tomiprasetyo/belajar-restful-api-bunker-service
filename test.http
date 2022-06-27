@@ -1,0 +1,43 @@
+### GET all bunker-services
+GET http://localhost:8095/api/bunker-services
+X-API-KEY: RAHASIA
+Accept: application/json
+
+### CREATE new bunker-service 
+POST http://localhost:8095/api/bunker-services
+X-API-KEY: RAHASIA
+Accept: application/json
+Content-Type: application/json
+
+{
+    "noSO": "",
+    "namaPerusahaan": "",
+    "namaKapal": "",
+    "namaProduk": "",
+    "jumlahPengisian": "",
+    "pelabuhan": "",
+    "nopolTruk": "",
+    "namaOperator": "",
+    "description": "",
+    "createdAt": "",
+    "updatedAt": ""
+}
+
+### GET bunker-service by id
+GET http://localhost:8095/api/bunker-services/1
+X-API-Key: RAHASIA
+Accept: application/json
+
+### UPDATE bunker-service by id
+PUT http://localhost:8095/api/bunker-services/1
+X-API-Key: RAHASIA
+Accept: application/json
+
+{
+    "name": "Best Laptop"
+}
+
+### Delete bunker-service by id
+DELETE http://localhost:8095/api/bunker-services/2
+X-API-Key: RAHASIA
+Accept: application/json
