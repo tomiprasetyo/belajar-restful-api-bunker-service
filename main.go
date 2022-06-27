@@ -1,10 +1,13 @@
 package main
 
 import (
+	"net/http"
+
 	"github.com/go-playground/validator/v10"
 	"github.com/julienschmidt/httprouter"
 	"github.com/tomiprasetyo/belajar-restful-api-bunker-service/app"
 	"github.com/tomiprasetyo/belajar-restful-api-bunker-service/controller"
+	"github.com/tomiprasetyo/belajar-restful-api-bunker-service/helper"
 	"github.com/tomiprasetyo/belajar-restful-api-bunker-service/repository"
 	"github.com/tomiprasetyo/belajar-restful-api-bunker-service/service"
 )
@@ -39,4 +42,14 @@ func main() {
 	// API menghapus data
 	router.DELETE("/api/bunker-services/", bunkerServiceController.Delete)
 
+	// buat server
+	server := http.Server{
+		// set address
+		Addr: "localhost:8095",
+		// set handler
+		Handler: router,
+	}
+
+	err := server.ListenAndServe()
+	helper.PanicIfError(err)
 }
