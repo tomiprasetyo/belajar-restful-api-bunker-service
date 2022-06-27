@@ -24,6 +24,15 @@ type BunkerServiceServeImpl struct {
 	Validate *validator.Validate
 }
 
+// buat method service baru yang returnnya adalah BunkerServiceServeImpl
+func NewBunkerServiceServe(bunkerServiceRepository repository.BunkerServiceRepository, DB *sql.DB, validate *validator.Validate) BunkerServiceServe {
+	return &BunkerServiceServeImpl{
+		BunkerServiceRepository: bunkerServiceRepository,
+		DB:                      DB,
+		Validate:                validate,
+	}
+}
+
 // implementasi kontrak
 func (service BunkerServiceServeImpl) Create(ctx context.Context, request web.BunkerServiceCreateRequest) web.BunkerServiceResponse {
 	// sebelum melakukan create data / transaksinya dimulai

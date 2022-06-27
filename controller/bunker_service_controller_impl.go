@@ -16,6 +16,13 @@ type BunkerServiceControllerImpl struct {
 	BunkerServiceServe service.BunkerServiceServe
 }
 
+// buat method controller baru yang returnnya adalah BunkerServiceControllerImpl
+func NewBunkerServiceController(bunkerServiceServe service.BunkerServiceServe) BunkerServiceController {
+	return &BunkerServiceControllerImpl{
+		BunkerServiceServe: bunkerServiceServe,
+	}
+}
+
 func (c *BunkerServiceControllerImpl) Create(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	// // decode data dari http request
 	bunkerServiceCreateRequest := web.BunkerServiceCreateRequest{}

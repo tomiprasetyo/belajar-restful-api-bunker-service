@@ -13,6 +13,11 @@ import (
 type BunkerServiceRepositoryImpl struct {
 }
 
+// buat method repository baru yang returnnya adalah BunkerServiceRepositoryImpl
+func NewBunkerServiceRepository() BunkerServiceRepository {
+	return &BunkerServiceRepositoryImpl{}
+}
+
 // membuat implementasi bunker service repostory mengikuti kontrak dari bunker service repository
 // method Save() digunakan untuk membuat data baru
 func (repository *BunkerServiceRepositoryImpl) Save(ctx context.Context, tx *sql.Tx, bunkerService domain.BunkerService) domain.BunkerService {
