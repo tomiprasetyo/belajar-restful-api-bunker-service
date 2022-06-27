@@ -7,6 +7,7 @@ import (
 	"github.com/julienschmidt/httprouter"
 	"github.com/tomiprasetyo/belajar-restful-api-bunker-service/app"
 	"github.com/tomiprasetyo/belajar-restful-api-bunker-service/controller"
+	"github.com/tomiprasetyo/belajar-restful-api-bunker-service/exception"
 	"github.com/tomiprasetyo/belajar-restful-api-bunker-service/helper"
 	"github.com/tomiprasetyo/belajar-restful-api-bunker-service/repository"
 	"github.com/tomiprasetyo/belajar-restful-api-bunker-service/service"
@@ -41,6 +42,9 @@ func main() {
 
 	// API menghapus data
 	router.DELETE("/api/bunker-services/:bunkerServiceId", bunkerServiceController.Delete)
+
+	// set standar error http
+	router.PanicHandler = exception.ErrorHandler
 
 	// buat server
 	server := http.Server{

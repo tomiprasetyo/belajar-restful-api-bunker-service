@@ -5,6 +5,7 @@ import (
 	"database/sql"
 
 	"github.com/go-playground/validator/v10"
+	"github.com/tomiprasetyo/belajar-restful-api-bunker-service/exception"
 	"github.com/tomiprasetyo/belajar-restful-api-bunker-service/helper"
 	"github.com/tomiprasetyo/belajar-restful-api-bunker-service/model/domain"
 	"github.com/tomiprasetyo/belajar-restful-api-bunker-service/model/web"
@@ -83,7 +84,9 @@ func (service BunkerServiceServeImpl) Update(ctx context.Context, request web.Bu
 
 	// validasi data terlebih dahulu
 	bunkerService, err := service.BunkerServiceRepository.FindById(ctx, tx, request.Id)
-	helper.PanicIfError(err)
+	if err != nil {
+		panic(exception.NewNotFoundError(err.Error()))
+	}
 
 	// jika sudah ketemua datanya
 	bunkerService.NoSO = request.NoSO
@@ -109,7 +112,9 @@ func (service BunkerServiceServeImpl) Delete(ctx context.Context, bunkerServiceI
 
 	// validasi data terlebih dahulu
 	bunkerService, err := service.BunkerServiceRepository.FindById(ctx, tx, bunkerServiceId)
-	helper.PanicIfError(err)
+	if err != nil {
+		panic(exception.NewNotFoundError(err.Error()))
+	}
 
 	service.BunkerServiceRepository.Delete(ctx, tx, bunkerService)
 }
@@ -120,7 +125,9 @@ func (service BunkerServiceServeImpl) FindById(ctx context.Context, bunkerServic
 	defer helper.CommitOrRollback(tx)
 
 	bunkerService, err := service.BunkerServiceRepository.FindById(ctx, tx, bunkerServiceId)
-	helper.PanicIfError(err)
+	if err != nil {
+		panic(exception.NewNotFoundError(err.Error()))
+	}
 
 	return helper.ToBunkerServiceResponse(bunkerService)
 
