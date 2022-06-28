@@ -9,6 +9,7 @@ import (
 	"github.com/tomiprasetyo/belajar-restful-api-bunker-service/controller"
 	"github.com/tomiprasetyo/belajar-restful-api-bunker-service/exception"
 	"github.com/tomiprasetyo/belajar-restful-api-bunker-service/helper"
+	"github.com/tomiprasetyo/belajar-restful-api-bunker-service/middleware"
 	"github.com/tomiprasetyo/belajar-restful-api-bunker-service/repository"
 	"github.com/tomiprasetyo/belajar-restful-api-bunker-service/service"
 )
@@ -51,7 +52,7 @@ func main() {
 		// set address
 		Addr: "localhost:8095",
 		// set handler
-		Handler: router,
+		Handler: middleware.NewAuthMiddleware(router),
 	}
 
 	err := server.ListenAndServe()

@@ -1,11 +1,11 @@
 ### GET all bunker-services
 GET http://localhost:8095/api/bunker-services
-X-API-KEY: RAHASIA
+X-API-KEY: SECRETKEY
 Accept: application/json
 
 ### CREATE new bunker-service 
 POST http://localhost:8095/api/bunker-services
-X-API-KEY: RAHASIA
+X-API-KEY: SECRETKEY
 Accept: application/json
 Content-Type: application/json
 
@@ -25,12 +25,12 @@ Content-Type: application/json
 
 ### GET bunker-service by id
 GET http://localhost:8095/api/bunker-services/1
-X-API-Key: RAHASIA
+X-API-Key: SECRETKEY
 Accept: application/json
 
 ### UPDATE bunker-service by id
 PUT http://localhost:8095/api/bunker-services/1
-X-API-Key: RAHASIA
+X-API-Key: SECRETKEY
 Accept: application/json
 
 {
@@ -39,5 +39,5 @@ Accept: application/json
 
 ### Delete bunker-service by id
 DELETE http://localhost:8095/api/bunker-services/2
-X-API-Key: RAHASIA
+X-API-Key: SECRETKEY
 Accept: application/json
